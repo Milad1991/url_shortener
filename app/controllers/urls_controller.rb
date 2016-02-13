@@ -1,21 +1,17 @@
 class UrlsController < ApplicationController
   def show
     @url = Url.find(params[:id])
+    redirect_to ("#{@url.input}")
   end
 
   def new
-    @url = Url.new
+    @urls = Url.all
   end
 
   def create
     @url = Url.new(url_params)
-    respond_to do |format|
-      if @url.save
-        format.html { redirect_to @url }
-      else
-        format.html { render :new }
-      end
-    end
+    @url.save
+    redirect_to urls_new_path(id: @url.id)
   end
 
 
@@ -31,7 +27,7 @@ class UrlsController < ApplicationController
   end
 
   def url_params
-    params.require(:url).permit(:input)
+    params.require(:url).permit(:input, :id)
   end
 
 

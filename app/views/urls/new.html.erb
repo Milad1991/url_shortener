@@ -1,5 +1,6 @@
 <div class="container">
   <h1>Enter the URL you wish to shorten!</h1>
+  <%= url_url(params[:id]) if params[:id] %>
   <%= form_for(:url) do |f| %>
   <div class="field">
     <%= f.label :input %>
